@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 
 
@@ -38,13 +39,14 @@ function Header() {
         </a>
         <div>
         {isLoggedIn ? (
-            <a href="/" className="main-nav-item" onClick={handleLogout}>
-              <FontAwesomeIcon icon={faSignOutAlt} /> Sign out
-            </a>
+              <>
+             
+                <Link to="/user" className="main-nav-item"> <FontAwesomeIcon icon={faUserCircle} /> User</Link>
+                <Link to="/" className="main-nav-item" onClick={handleLogout}> <FontAwesomeIcon icon={faSignOutAlt} /> Sign out</Link>
+            
+              </>
           ) : (
-            <a href="/login" className="main-nav-item" onClick={handleSignInClick}>
-              <FontAwesomeIcon icon={faUserCircle} /> Sign in
-            </a>
+                <Link to="/login" className="main-nav-item" onClick={handleSignInClick}> <FontAwesomeIcon icon={faUserCircle} /> Sign in</Link>
           )}
         </div>
       </nav>

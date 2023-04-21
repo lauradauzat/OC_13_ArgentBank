@@ -11,13 +11,13 @@ function App() {
 
   return (
     <>    
-    <Header />
+   
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
-        {/* Add other routes here */}
       </Routes>
     </Router>
     <Footer />  

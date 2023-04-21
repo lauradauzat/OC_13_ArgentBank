@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+
+
 
 function User() {
+
+  const [data, setData] = useState({});
+  
+ // Make the API request
+ useEffect(() => {
+  // Make the API request
+  fetch("http://localhost:3001/api/v1/user/profile", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      // Handle the response data
+      setData(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}, []);
+
   return (
     <div>
       <main className="main bg-dark">
@@ -8,7 +40,7 @@ function User() {
           <h1>
             Welcome back
             <br />
-            Tony Jarvis!
+            {data.body ? data.body.firstName : "John"} {data.body ? data.body.lastName : "Doe"}
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>

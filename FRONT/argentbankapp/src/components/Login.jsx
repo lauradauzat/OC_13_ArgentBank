@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -6,20 +8,33 @@ function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(username, password);
+    const body = {
+      "email": username,
+      "password": password
+    }; 
+    console.log(body);
 
     // Make the API request
     fetch("http://localhost:3001/api/v1/user/login", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify(body)
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
+        console.log(data);
         // Handle the response data
-        localStorage.setItem("token", data.token);
-        window.location.href = "/user";
+        localStorage.setItem("token", data.body.token);
+  
+          window.location.href = "/user";
       })
       .catch((error) => {
         console.error("Error:", error);
