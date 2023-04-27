@@ -1,41 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Service from "../service";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 function User() {
 
-//   const [data, setData] = useState({});
-  
-//  // Make the API request
-//  useEffect(() => {
-//   // Make the API request
-//   fetch("http://localhost:3001/api/v1/user/profile", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": "Bearer " + localStorage.getItem("token")
-//     },
-//   })
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
-//       return response.json();
-//     })
-//     .then((data) => {
-//       console.log(data);
-//       // Handle the response data
-//       setData(data);
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//     });
-// }, []);
+const userAuth = useSelector(state => state.userAuth);
+console.log ("userAuth", userAuth); 
 
+//start working on edit firstName and lastName
+const dispatch = useDispatch();
 
 const [firstName, setFirstName] = useState('');
 const [lastName, setLastName] = useState('');
+
+const [editingMode, setEditingMode] = useState(false);
+
+const handleEdit = () => {
+  !editingMode ? setEditingMode(true) : setEditingMode(false);
+  console.log("editingMode", editingMode);
+};
 
 useEffect(() => {
   const service = new Service();
@@ -53,12 +38,39 @@ useEffect(() => {
     <div>
       <main className="main bg-dark">
         <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            {firstName} {lastName}
-          </h1>
-          <button className="edit-button">Edit Name</button>
+          { !editingMode ? (
+            <>
+              <h1>
+                Welcome back
+              <br />
+                {userAuth.firstName} {userAuth.lastName}
+              </h1>
+              <button className="edit-button" onClick={handleEdit}>Edit Name</button>
+            </>
+          ) : (
+            <>
+              <h1> Welcome back </h1>
+              <form className="form" onSubmit={handleEdit}>
+              
+                <input
+                  type="text" id="firstName" name="firstName"
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
+                />
+       
+                <input 
+                  type="text" id="lastName" name="lastName"
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
+                /><br></br>
+                <button className="save-button" type="submit">Save</button>
+                <button className="cancel-button" onClick={handleEdit}>Cancel</button>
+              </form>
+            </> 
+          )}
+
+
+          
         </div>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
