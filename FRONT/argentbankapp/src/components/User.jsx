@@ -1,35 +1,51 @@
 import React, { useState, useEffect } from "react";
-
+import Service from "../service";
 
 
 
 function User() {
 
-  const [data, setData] = useState({});
+//   const [data, setData] = useState({});
   
- // Make the API request
- useEffect(() => {
-  // Make the API request
-  fetch("http://localhost:3001/api/v1/user/profile", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + localStorage.getItem("token")
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+//  // Make the API request
+//  useEffect(() => {
+//   // Make the API request
+//   fetch("http://localhost:3001/api/v1/user/profile", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": "Bearer " + localStorage.getItem("token")
+//     },
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log(data);
+//       // Handle the response data
+//       setData(data);
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//     });
+// }, []);
+
+
+const [firstName, setFirstName] = useState('');
+const [lastName, setLastName] = useState('');
+
+useEffect(() => {
+  const service = new Service();
+  service.fetchData()
+    .then(() => {
+      setFirstName(service.firstName);
+      setLastName(service.lastName);
     })
-    .then((data) => {
-      console.log(data);
-      // Handle the response data
-      setData(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+    .catch(error => {
+      console.error(error);
     });
 }, []);
 
@@ -40,7 +56,7 @@ function User() {
           <h1>
             Welcome back
             <br />
-            {data.body ? data.body.firstName : "John"} {data.body ? data.body.lastName : "Doe"}
+            {firstName} {lastName}
           </h1>
           <button className="edit-button">Edit Name</button>
         </div>
