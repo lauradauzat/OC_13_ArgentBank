@@ -4,16 +4,11 @@
 // */
 
 
-import { useDispatch } from 'react-redux';
-
-//import { logUser, loadProfile } from './store';
 
 const loginUrl = 'http://localhost:3001/api/v1/user/login';
 const profileUrl = 'http://localhost:3001/api/v1/user/profile';
 
 const Service = {
-  //const dispatch = useDispatch();
-
 
    retrieveToken : async (body) => {
 

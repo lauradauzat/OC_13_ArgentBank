@@ -9,11 +9,9 @@ const userAuthSlice = createSlice({
     },
       reducers: {
         logUser: (state, action) => {
-            //console.log(action);
             state.token = action.payload; 
         },
         loadProfile: (state, action) => {
-            console.log(action)
             state.firstName = action.payload?.firstName;
             state.lastName = action.payload?.lastName;
         },

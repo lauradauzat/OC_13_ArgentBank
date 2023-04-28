@@ -25,31 +25,6 @@ function Login() {
     //console.log("token", token);
     dispatch({type:'userAuth/logUser',payload:token});
     navigate("/user");
-
-    // // Make the API request
-    // fetch("http://localhost:3001/api/v1/user/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(body)
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //     // Handle the response data
-    //     localStorage.setItem("token", data.body.token);
-  
-    //       window.location.href = "/user"; 
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   }
 
   return (
