@@ -1,51 +1,71 @@
-/**
-A service class that handles the retrieval of the API data from http://localhost:3001/api/v1/user/profile".
-@class Service
-*/
+// /**
+// A service class that handles the retrieval of the API data from http://localhost:3001/api/v1/user/profile".
+// @class Service
+// */
 
-const url = 'http://localhost:3001/api/v1/user/profile';
 
-export const fetchData = async () => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("token")
-      },
-    });
+import { useDispatch } from 'react-redux';
 
-    if (response.status === 404) {
-      console.error('User not found');
+//import { logUser, loadProfile } from './store';
+
+const loginUrl = 'http://localhost:3001/api/v1/user/login';
+const profileUrl = 'http://localhost:3001/api/v1/user/profile';
+
+const Service = {
+  //const dispatch = useDispatch();
+
+
+   retrieveToken : async (body) => {
+
+    try {
+      const response = await fetch(loginUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.status === 404) {
+        console.error('User not found');
+        return null;
+      }
+
+      const data = await response.json();
+
+      return data.body.token;
+    } catch (error) {
+      console.error(error);
       return null;
     }
+  },
 
-    const data = await response.json();
+   getProfile : async (token) => {
+    try {
+      const response = await fetch(profileUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    return {
-      data: data,
-    };
-  } catch (error) {
-    console.error(error);
-    return null;
+      if (response.status === 404) {
+        console.error('User not found');
+        return null;
+      }
+
+      const data = await response.json();
+      console.log(data)
+      return {
+        firstName: data.body.firstName,
+        lastName: data.body.lastName,
+      };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
 };
 
-export default class Service {
-  constructor() {
-    this.dataAPI = null;
-  }
-
-  async fetchData() {
-    const response = await fetchData();
-    this.dataAPI = response?.data;
-  }
-
-  get firstName() {
-    return this.dataAPI?.body?.firstName ?? '';
-  }
-
-  get lastName() {
-    return this.dataAPI?.body?.lastName ?? '';
-  }
-}
+export default Service;

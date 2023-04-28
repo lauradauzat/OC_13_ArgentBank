@@ -6,14 +6,23 @@ import { useDispatch, useSelector } from "react-redux";
 
 function User() {
 
-const userAuth = useSelector(state => state.userAuth);
-console.log ("userAuth", userAuth); 
+ const dispatch = useDispatch();
+const token = useSelector(state => state.userAuth.token);
+console.log("token", token);
 
-//start working on edit firstName and lastName
-const dispatch = useDispatch();
+Service.getProfile(token).then((userInfos) => {
+  console.log("userInfos", userInfos);
+  dispatch({type:'userAuth/loadProfile',payload:userInfos});
+  return userInfos;
+});
 
-const [firstName, setFirstName] = useState('');
-const [lastName, setLastName] = useState('');
+const firstName = useSelector(state => state.userAuth.firstName);
+const lastName = useSelector(state => state.userAuth.lastName);
+console.log("firstName", firstName);
+console.log("lastName", lastName);
+
+
+//dispatch({type:'userAuth/loadProfile',payload:userInfos});
 
 const [editingMode, setEditingMode] = useState(false);
 
@@ -22,17 +31,7 @@ const handleEdit = () => {
   console.log("editingMode", editingMode);
 };
 
-useEffect(() => {
-  const service = new Service();
-  service.fetchData()
-    .then(() => {
-      setFirstName(service.firstName);
-      setLastName(service.lastName);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}, []);
+
 
   return (
     <div>
@@ -43,16 +42,18 @@ useEffect(() => {
               <h1>
                 Welcome back
               <br />
-                {userAuth.firstName} {userAuth.lastName}
+                
+              {firstName} {lastName}
               </h1>
-              <button className="edit-button" onClick={handleEdit}>Edit Name</button>
+              <button className="editbtn button" onClick={handleEdit}>Edit Name</button>
             </>
           ) : (
             <>
               <h1> Welcome back </h1>
               <form className="form" onSubmit={handleEdit}>
-              
-                <input
+             
+
+              <input
                   type="text" id="firstName" name="firstName"
                   value={firstName}
                   onChange={e => setFirstName(e.target.value)}
@@ -62,9 +63,12 @@ useEffect(() => {
                   type="text" id="lastName" name="lastName"
                   value={lastName}
                   onChange={e => setLastName(e.target.value)}
-                /><br></br>
-                <button className="save-button" type="submit">Save</button>
-                <button className="cancel-button" onClick={handleEdit}>Cancel</button>
+                />
+            
+              
+                <br></br>
+                <button className="savebtn button" type="submit">Save</button>
+                <button className="cancelbtn button" onClick={handleEdit}>Cancel</button>
               </form>
             </> 
           )}

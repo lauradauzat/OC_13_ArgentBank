@@ -5,15 +5,13 @@ import Login from "./components/Login";
 import User from "./components/User";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Provider } from "react-redux";
-import store from "./store";
+
 
 function App() {
 
 
   return (
-    <>    
-   <Provider store={store}>
+    <>     
    <Router>
       <Header />
       <Routes>
@@ -22,8 +20,7 @@ function App() {
         <Route path="/user" element={<User />} />
       </Routes>
     </Router>
-    <Footer />  
-   </Provider>
+    <Footer />        
 
     </>
 

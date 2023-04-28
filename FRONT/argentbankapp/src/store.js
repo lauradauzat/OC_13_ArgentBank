@@ -3,15 +3,19 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const userAuthSlice = createSlice({
     name: 'userAuth',
     initialState: {
-        firstName: 'Jean Michel',
-        lastName: 'Testage',
-        token: 'azeoiuyaoiuy',
+        firstName: ' ',
+        lastName: '',
+        token: '',
     },
       reducers: {
         logUser: (state, action) => {
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-            state.token = action.payload.token;
+            //console.log(action);
+            state.token = action.payload; 
+        },
+        loadProfile: (state, action) => {
+            console.log(action)
+            state.firstName = action.payload?.firstName;
+            state.lastName = action.payload?.lastName;
         },
         clearUser: (state) => {
             state.firstName = '';

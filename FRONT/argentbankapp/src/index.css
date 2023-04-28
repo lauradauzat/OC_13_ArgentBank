@@ -90,6 +90,7 @@ body {
 
 .main {
   flex: 1;
+  padding-top: 1rem;
 }
 
 .bg-dark {
@@ -108,6 +109,10 @@ body {
   position: absolute !important;
   width: 1px !important;
   white-space: nowrap !important; /* 3 */
+}
+
+h1 {
+  line-height: 2em;
 }
 
 .main-nav {
@@ -272,9 +277,13 @@ body {
   font-weight: bold;
 }
 
-.input-wrapper input {
+.input-wrapper input, input {
   padding: 5px;
   font-size: 1.2rem;
+}
+
+input {
+  margin: 1em 10px; 
 }
 
 .footer {
@@ -326,12 +335,13 @@ body {
   flex: 1;
 }
 
-.edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
-  color: #fff;
+.button {
+  border-color: #747bff;
+  background-color: white;
+  color: #747bff;
   font-weight: bold;
   padding: 10px;
+  margin: 0 10px;   
 }
 
 .header {
@@ -346,8 +356,8 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: #747bff;
+  background-color: #747bff;
   color: #fff;
 }
 

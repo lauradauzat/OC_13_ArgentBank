@@ -1,44 +1,55 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Service from "../service";
+import { useDispatch } from "react-redux";
 
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(event) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
     event.preventDefault();
+
     console.log(username, password);
     const body = {
       "email": username,
       "password": password
     }; 
-    console.log(body);
+    //console.log(body);
 
-    // Make the API request
-    fetch("http://localhost:3001/api/v1/user/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(body)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        // Handle the response data
-        localStorage.setItem("token", data.body.token);
+    const token = await Service.retrieveToken(body)
+    //console.log("token", token);
+    dispatch({type:'userAuth/logUser',payload:token});
+    navigate("/user");
+
+    // // Make the API request
+    // fetch("http://localhost:3001/api/v1/user/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(body)
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Network response was not ok");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     // Handle the response data
+    //     localStorage.setItem("token", data.body.token);
   
-          window.location.href = "/user";
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    //       window.location.href = "/user"; 
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   }
 
   return (
