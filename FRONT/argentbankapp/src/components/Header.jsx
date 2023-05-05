@@ -41,12 +41,12 @@ function Header() {
         {token != "" ? (
               <>
              
-                <Link to="/user" className="main-nav-item"> <FontAwesomeIcon icon={faUserCircle} /> {firstName}  {lastName} </Link>
-                <Link to="/" className="main-nav-item" onClick={handleLogout}> <FontAwesomeIcon icon={faSignOutAlt} /> Sign out</Link>
+                <Link to="/user" className="main-nav-item"> <FontAwesomeIcon icon={faUserCircle} /> <span>{firstName}  {lastName} </span></Link>
+                <Link to="/" className="main-nav-item" onClick={handleLogout}> <FontAwesomeIcon icon={faSignOutAlt} /> <span>Sign Out</span></Link>
             
               </>
           ) : (
-                <Link to="/login" className="main-nav-item" onClick={handleSignInClick}> <FontAwesomeIcon icon={faUserCircle} /> Sign in</Link>
+                <Link to="/login" className="main-nav-item" onClick={handleSignInClick}> <FontAwesomeIcon icon={faUserCircle} /> <span>Sign in</span></Link>
           )}
         </div>
       </nav>

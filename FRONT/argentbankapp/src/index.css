@@ -260,6 +260,7 @@ h1 {
 
 .input-remember {
   display: flex;
+  align-items: center;
 }
 
 .input-remember label {
@@ -374,3 +375,41 @@ input {
     width: 200px;
   }
 }
+
+/* not found page */
+
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+}
+
+.not-found h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #272727;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+.not-found p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: #636363;
+}
+
+/* hide h1 on mobile */
+@media only screen and (max-width: 600px) {
+ .main-nav-item span {
+    display: none;
+  }
+  .svg-inline--fa {
+    height: 2em;
+  }
+}
+
