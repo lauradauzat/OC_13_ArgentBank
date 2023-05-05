@@ -60,7 +60,36 @@ const Service = {
       console.error(error);
       return null;
     }
+  },
+
+  updateProfile : async (token, body) => {
+    try {
+      const response = await fetch(profileUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.status === 404) {
+        console.error('User not found');
+        return null;
+      }
+
+      const data = await response.json();
+
+      return {
+        firstName: data.body.firstName,
+        lastName: data.body.lastName,
+      };
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
   }
+      
 };
 
 export default Service;

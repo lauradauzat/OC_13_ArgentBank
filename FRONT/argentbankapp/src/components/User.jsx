@@ -21,15 +21,32 @@ const lastName = useSelector(state => state.userAuth.lastName);
 console.log("firstName", firstName);
 console.log("lastName", lastName);
 
-
-//dispatch({type:'userAuth/setUser',payload:userInfos});
-
 const [editingMode, setEditingMode] = useState(false);
 
 const handleEdit = () => {
   !editingMode ? setEditingMode(true) : setEditingMode(false);
   console.log("editingMode", editingMode);
 };
+
+const [editedfirstName, setFirstName] = useState(firstName);
+const [editedlastName, setLastName] = useState(lastName);
+
+function updateData(event) {
+  event.preventDefault();
+  console.log("updateData");
+  const body = {
+    "firstName": editedfirstName,
+    "lastName": editedlastName
+  };
+  console.log("body", body);
+  Service.updateProfile(token, body).then((userInfos) => {
+    console.log("userInfos", userInfos);
+    dispatch({type:'userAuth/setUser',payload:userInfos});
+    return userInfos;
+  });
+  setEditingMode(false);
+}
+
 
 
 
@@ -50,18 +67,18 @@ const handleEdit = () => {
           ) : (
             <>
               <h1> Welcome back </h1>
-              <form className="form" onSubmit={handleEdit}>
+              <form className="form" onSubmit={updateData} >
              
 
               <input
                   type="text" id="firstName" name="firstName"
-                  value={firstName}
+                  value={editedfirstName}
                   onChange={e => setFirstName(e.target.value)}
                 />
        
                 <input 
                   type="text" id="lastName" name="lastName"
-                  value={lastName}
+                  value={editedlastName}
                   onChange={e => setLastName(e.target.value)}
                 />
             
