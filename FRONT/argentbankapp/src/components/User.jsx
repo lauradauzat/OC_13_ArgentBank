@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function User() {
 
- const dispatch = useDispatch();
+const dispatch = useDispatch();
 const token = useSelector(state => state.userAuth.token);
 console.log("token", token);
 
 Service.getProfile(token).then((userInfos) => {
   console.log("userInfos", userInfos);
-  dispatch({type:'userAuth/loadProfile',payload:userInfos});
+  dispatch({type:'userAuth/setUser',payload:userInfos});
   return userInfos;
 });
 
@@ -22,7 +22,7 @@ console.log("firstName", firstName);
 console.log("lastName", lastName);
 
 
-//dispatch({type:'userAuth/loadProfile',payload:userInfos});
+//dispatch({type:'userAuth/setUser',payload:userInfos});
 
 const [editingMode, setEditingMode] = useState(false);
 
