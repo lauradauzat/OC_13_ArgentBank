@@ -21,8 +21,12 @@ function Login() {
     }; 
     //console.log(body);
 
+    
     const token = await Service.retrieveToken(body)
-    //console.log("token", token);
+    if(token === null){
+      alert("Wrong username or password");
+      return;
+    }
     dispatch({type:'userAuth/logUser',payload:token});
     navigate("/user");
   }

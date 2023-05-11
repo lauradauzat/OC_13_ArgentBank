@@ -45,7 +45,8 @@ const Service = {
         },
       });
 
-      if (response.status === 404) {
+      if (response.status != 200) {
+        console.log(response.status);
         console.error('User not found');
         return null;
       }
