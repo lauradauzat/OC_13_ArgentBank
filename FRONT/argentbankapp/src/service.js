@@ -27,6 +27,7 @@ const Service = {
       }
 
       const data = await response.json();
+     
 
       return data.body.token;
     } catch (error) {
@@ -80,6 +81,7 @@ const Service = {
       }
 
       const data = await response.json();
+      console.log(data);
 
       return {
         firstName: data.body.firstName,
