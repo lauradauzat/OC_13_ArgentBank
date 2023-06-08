@@ -1,7 +1,7 @@
-// /**
-// A service class that handles the retrieval of the API data from http://localhost:3001/api/v1/user/profile".
-// @class Service
-// */
+/**
+A service class that handles the retrieval of the API data from http://localhost:3001/api/v1/user/profile".
+@class Service
+*/
 
 
 

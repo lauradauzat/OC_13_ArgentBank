@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 function Header() {
-  //const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") ? true : false);
   const token = useSelector(state => state.userAuth.token);
   const firstName = useSelector(state => state.userAuth.firstName);
   const lastName = useSelector(state => state.userAuth.lastName);

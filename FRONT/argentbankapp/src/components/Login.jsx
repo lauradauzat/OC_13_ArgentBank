@@ -19,9 +19,7 @@ function Login() {
       "email": username,
       "password": password
     }; 
-    //console.log(body);
 
-    
     const token = await Service.retrieveToken(body)
     if(token === null){
       alert("Wrong username or password");

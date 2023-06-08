@@ -1,6 +1,13 @@
+/**
+ * @fileoverview store.js is the redux store for the app
+ * @version 1.0.0
+ * @since 1.0.0
+ * @module store.js
+ * @see https://redux.js.org/tutorials/essentials/part-1-overview-concepts
+ * @requires reduxjs/toolkit
+ */
+
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-//import { persistReducer, persistStore } from 'redux-persist';
 const initialState = JSON.parse( localStorage.getItem('initialState') || '{"firstName":"","lastName":"","token":""}');
 
 const userAuthSlice = createSlice({
@@ -24,18 +31,7 @@ const userAuthSlice = createSlice({
   },
 });
 
-// const persistConfig = {
-//   key: 'root',
-//   storage,
-// };
 
-//const persistedReducer = persistReducer(persistConfig, userAuthSlice.reducer);
-
-// const store = configureStore({
-//   reducer: {
-//     userAuth: persistedReducer,
-//   },
-// });
 
 const store = configureStore({
   reducer: {
@@ -43,7 +39,5 @@ const store = configureStore({
   },
 });
 
-//const persistor = persistStore(store);
 
-//export { store, persistor };
 export { store};
