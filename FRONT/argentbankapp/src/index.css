@@ -97,6 +97,10 @@ body {
   background-color: #12002b;
 }
 
+.bg-light {
+  background-color: #d0d5e5;
+}
+
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
@@ -113,6 +117,7 @@ body {
 
 h1 {
   line-height: 2em;
+  color:#2c3e50;
 }
 
 .main-nav {
@@ -413,3 +418,8 @@ input {
   }
 }
 
+/*last edits - fix section container */ 
+
+.section-container {
+  padding-bottom: 30px;
+}

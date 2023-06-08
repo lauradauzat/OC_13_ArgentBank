@@ -52,7 +52,7 @@ function updateData(event) {
 
   return (
     <div>
-      <main className="main bg-dark">
+      <main className="main bg-light">
         <div className="header">
           { !editingMode ? (
             <>
