@@ -15,9 +15,7 @@ function Header() {
 
   function handleLogout(event) {
     event.preventDefault();
-    
-    dispatch({type:'userAuth/logUser',payload:''});
-    dispatch({type:'userAuth/loadProfile',payload:''});
+    dispatch({type:'userAuth/clearUser',payload:''});
     navigate("/login");
     
   }
