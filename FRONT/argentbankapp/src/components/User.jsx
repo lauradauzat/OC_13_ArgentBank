@@ -94,6 +94,7 @@ function updateData(event) {
           
         </div>
         <h2 className="sr-only">Accounts</h2>
+        <div className="section-container">
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
@@ -124,6 +125,7 @@ function updateData(event) {
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
+        </div>
       </main>
 
     </div>
