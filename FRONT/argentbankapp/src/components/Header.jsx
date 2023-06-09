@@ -38,7 +38,7 @@ function Header() {
         {token != "" ? (
               <>
              
-                <Link to="/user" className="main-nav-item"> <FontAwesomeIcon icon={faUserCircle} /> <span>{firstName}  {lastName} </span></Link>
+                <Link to="/user" className="main-nav-item"> <FontAwesomeIcon icon={faUserCircle} /> <span>{firstName} </span> <span> {lastName} </span></Link>
                 <Link to="/" className="main-nav-item" onClick={handleLogout}> <FontAwesomeIcon icon={faSignOutAlt} /> <span>Sign Out</span></Link>
             
               </>

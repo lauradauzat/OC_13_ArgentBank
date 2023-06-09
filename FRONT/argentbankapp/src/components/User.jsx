@@ -60,7 +60,7 @@ function updateData(event) {
                 Welcome back
               <br />
                 
-              {firstName} {lastName}
+              <span>{firstName} </span> <span> {lastName} </span>
               </h1>
               <button className="editbtn button" onClick={handleEdit}>Edit Name</button>
             </>
